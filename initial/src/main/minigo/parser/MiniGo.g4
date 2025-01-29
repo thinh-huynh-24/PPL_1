@@ -38,6 +38,11 @@ NL: '\n' -> skip; //skip newlines
 
 WS : [ \t\r]+ -> skip ; // skip spaces, tabs 
 
-ERROR_CHAR: .;
-ILLEGAL_ESCAPE:.;
-UNCLOSE_STRING:.;
+STRING: '"' (ESC | ~["\\\r\n])* '"' ;
+fragment ESC: '\\' [btnfr"'\\] ;
+
+ERROR_CHAR: . { raise ErrorToken(self.text) } ;
+
+UNCLOSE_STRING: '"' (ESC | ~["\\\r\n])* { raise UncloseString(self.text[1:]) } ;
+
+ILLEGAL_ESCAPE: '"' (ESC | ~["\\\r\n])* '\\' ~[btnfr"'\\] { raise IllegalEscape(self.text[1:]) } ;
