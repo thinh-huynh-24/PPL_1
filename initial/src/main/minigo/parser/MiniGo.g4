@@ -37,11 +37,39 @@ program  : decl+ EOF ;
 
 decl: funcdecl | vardecl  ;
 
-vardecl: 'var' ID 'int' ';' ;
+
 
 funcdecl: 'func' ID '(' ')' '{' '}' ';' ;
 
 ID: [a-z]+;
+
+expression: primitive_type |
+
+//func (ten kieu)? ten chu ki khoi
+func_decl: FUNC (LPAREN IDENTIFIER type_ RPAREN)? IDENTIFIER signature block;
+//{ bieu thuc* }
+block: LBRACE expression* RBRACE;
+//const ten gan bieu thuc;
+const_decl: CONST IDENTIFIER ASSIGN expression SEMI;
+
+// var ten kieu? (gan bieu thuc)? ;
+vardecl: VAR IDENTIFIER type_? (ASSIGN expression)? SEMI ;
+
+type_decl: TYPE IDENTIFIER (STRUCT LBRACE (fieldDecl SEMI)* RBRACE | INTERFACE LBRACE (methodSpec SEMI)* RBRACE) SEMI;
+//ten kieu
+field_decl: IDENTIFIER type_;
+//ten chu ki?
+method_spec: IDENTIFIER signature;
+// ( tham so? ) kieu?
+signature: LPAREN (parameterList)? RPAREN type_?;
+//danh sach tham so 
+parameterList: parameter (COMMA parameter)*;
+// ten kieu
+parameter: IDENTIFIER type_;
+//kieu chu
+type_: ( INT | FLOAT | STRING | BOOLEAN | IDENTIFIER ) (LBRACK INT_LIT RBRACK)*;
+//kieu lit
+primitive_type: STRING_LITERAL | FLOAT_LITERAL | INTERGER_LITERAL | BOOLEAN_LITERAL | NIL_LITERAL;
 
 
 //LITERAL
@@ -60,6 +88,7 @@ fragment DEC: '0' | [1-9] [0-9]*;
 fragment BIN: ('0b'|'0B') [01]+;
 fragment OCT: ('0o'|'0O') [0-7]+;
 fragment HEX: ('0x'|'0X') [0-9a-fA-F]+;
+SIGN: [+-];
 
 
 //SEPARATORSEPARATOR
@@ -126,7 +155,6 @@ IDENTIFIER: [a-zA-Z_] [a-zA-Z0-9_]*;
 
 
 
-//STRING: '"' (ESC | ~["\\\r\n])* '"' ;
 fragment ESC: '\\' [btnfr"'\\] ;
 
 ERROR_CHAR: . { raise ErrorToken(self.text) } ;
