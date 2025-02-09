@@ -33,17 +33,60 @@ WS : [ \t\r\f]+ -> skip ; // skip spaces, tabs
 
 
 
-program  : decl+ EOF ;
+program  : statement+ EOF ;
 
-decl: funcdecl | vardecl  ;
+statement: vardecl
+        | const_decl
+        | func_decl
+        | assignment_stmt
+        | if_stmt
+        | for_stmt
+        | range_stmt
+        | break_stmt
+        | continue_stmt
+        | return_stmt
+        | call_stmt
+        ;
+
+assignment_stmt: (primitive_type | array_access | struct_access) ass_op expression SEMI;
+ass_op: (ASSIGN|COLON_ASSIGN|ADD_ASSIGN|SUB_ASSIGN|MUL_ASSIGN|DIV_ASSIGN|MOD_ASSIGN);
+if_stmt: IF expression block (ELSE IF expression block )* (ELSE block)?;
+for_stmt: FOR (basic|with_init_con_upd|range) block;
+basic: expression;
+with_init_con_upd: (assignment | varDecl) SEMI expression? SEMI assignment;
+range_stmt: (IDENTIFIER | '_') COMMA IDENTIFIER ass_op RANGE IDENTIFIER;
+break_stmt: BREAK SEMI;
+continue_stmt: CONTINUE SEMI;
+return_stmt: RETURN expression? SEMI;
+call_stmt: (IDENTIFIER DOT)? IDENTIFIER signature (SEMI|NL);
+
+expression
+    : operands
+    | array_access
+    | struct_access
+    | func_call
+    | (NOT | SUB) expression                 
+    | expression (MUL | DIV | MOD) expression               
+    | expression (ADD | SUB) expression                    
+    | expression (EQ | NEQ | LT | LE | GT | GE) expression 
+    | expression AND expression                             
+    | expression OR expression                              
+    ;
+
+operands
+    : primitive_type
+    | array_lit
+    | struct_lit
+    | LPAREN expression RPAREN
+    ;
 
 
-
-funcdecl: 'func' ID '(' ')' '{' '}' ';' ;
-
-ID: [a-z]+;
-
-expression: primitive_type |
+array_access: IDENTIFIER (LBRACK INT_LIT RBRACK)+;
+struct_access: IDENTIFIER DOT IDENTIFIER;
+func_call: IDENTIFIER DOT IDENTIFIER signature;
+array_lit: type_ LBRACK  ( expression (COMMA expression)* | (LBRACK (expression (COMMA expression)*) RBRACK)+) RBRACK;
+struct_lit: IDENTIFIER LBRACE (fieldInit (COMMA fieldInit)*)? RBRACE;
+fieldInit: IDENTIFIER COLON expression;
 
 //func (ten kieu)? ten chu ki khoi
 func_decl: FUNC (LPAREN IDENTIFIER type_ RPAREN)? IDENTIFIER signature block;
@@ -67,12 +110,13 @@ parameterList: parameter (COMMA parameter)*;
 // ten kieu
 parameter: IDENTIFIER type_;
 //kieu chu
-type_: ( INT | FLOAT | STRING | BOOLEAN | IDENTIFIER ) (LBRACK INT_LIT RBRACK)*;
+type_: (LBRACK INTERGER_LITERAL RBRACK)* ( INT | FLOAT | STRING | BOOLEAN | NIL | IDENTIFIER );
 //kieu lit
-primitive_type: STRING_LITERAL | FLOAT_LITERAL | INTERGER_LITERAL | BOOLEAN_LITERAL | NIL_LITERAL;
+primitive_type: STRING_LITERAL | FLOAT_LITERAL | SIGN? INTERGER_LITERAL | BOOLEAN_LITERAL | NIL_LITERAL | IDENTIFIER;
 
 
 //LITERAL
+
 NIL_LITERAL: NIL;
 
 BOOLEAN_LITERAL: (TRUE | FALSE);
@@ -91,6 +135,8 @@ fragment HEX: ('0x'|'0X') [0-9a-fA-F]+;
 SIGN: [+-];
 
 
+
+COLON: ':';
 //SEPARATORSEPARATOR
 LPAREN   : '(';  
 RPAREN   : ')';   
