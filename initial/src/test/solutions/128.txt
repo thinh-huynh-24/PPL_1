@@ -1,1 +1,1 @@
-false,<EOF>
+int,<EOF>

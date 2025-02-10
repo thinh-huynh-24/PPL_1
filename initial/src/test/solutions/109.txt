@@ -1,1 +1,1 @@
-x,userName,tempVar,count123,<EOF>
+abc,-,123,<EOF>

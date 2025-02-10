@@ -1,1 +1,1 @@
-/* this is a /* nested */ comment */abc
+123abc

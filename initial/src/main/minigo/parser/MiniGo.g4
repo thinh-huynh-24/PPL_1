@@ -24,7 +24,8 @@ options{
 	language=Python3;
 }
 
-ML_COMMENT: '/*' (ML_COMMENT | .)*? '*/' -> skip;
+fragment NESTED_COMMENT: '/*' (NESTED_COMMENT | ~'*/')* '*/';
+ML_COMMENT: NESTED_COMMENT -> skip;
 SL_COMMENT: '//' ~[\r\n]* -> skip;
 
 NL: '\n' -> skip; //skip newlines
@@ -51,9 +52,9 @@ statement: vardecl
 assignment_stmt: (primitive_type | array_access | struct_access) ass_op expression SEMI;
 ass_op: (ASSIGN|COLON_ASSIGN|ADD_ASSIGN|SUB_ASSIGN|MUL_ASSIGN|DIV_ASSIGN|MOD_ASSIGN);
 if_stmt: IF expression block (ELSE IF expression block )* (ELSE block)?;
-for_stmt: FOR (basic|with_init_con_upd|range) block;
+for_stmt: FOR (basic|with_init_con_upd|range_stmt) block;
 basic: expression;
-with_init_con_upd: (assignment | varDecl) SEMI expression? SEMI assignment;
+with_init_con_upd: (assignment_stmt | vardecl) SEMI expression? SEMI assignment_stmt;
 range_stmt: (IDENTIFIER | '_') COMMA IDENTIFIER ass_op RANGE IDENTIFIER;
 break_stmt: BREAK SEMI;
 continue_stmt: CONTINUE SEMI;
@@ -81,7 +82,7 @@ operands
     ;
 
 
-array_access: IDENTIFIER (LBRACK INT_LIT RBRACK)+;
+array_access: IDENTIFIER (LBRACK INTERGER_LITERAL RBRACK)+;
 struct_access: IDENTIFIER DOT IDENTIFIER;
 func_call: IDENTIFIER DOT IDENTIFIER signature;
 array_lit: type_ LBRACK  ( expression (COMMA expression)* | (LBRACK (expression (COMMA expression)*) RBRACK)+) RBRACK;
@@ -98,7 +99,7 @@ const_decl: CONST IDENTIFIER ASSIGN expression SEMI;
 // var ten kieu? (gan bieu thuc)? ;
 vardecl: VAR IDENTIFIER type_? (ASSIGN expression)? SEMI ;
 
-type_decl: TYPE IDENTIFIER (STRUCT LBRACE (fieldDecl SEMI)* RBRACE | INTERFACE LBRACE (methodSpec SEMI)* RBRACE) SEMI;
+type_decl: TYPE IDENTIFIER (STRUCT LBRACE (field_decl SEMI)* RBRACE | INTERFACE LBRACE (method_spec SEMI)* RBRACE) SEMI;
 //ten kieu
 field_decl: IDENTIFIER type_;
 //ten chu ki?
@@ -124,8 +125,8 @@ BOOLEAN_LITERAL: (TRUE | FALSE);
 STRING_LITERAL: '"' (ESC | ~[\\"])* '"';
 fragment ESC_SEQ: '\\' ('n' | 't' | 'r' | '"' | '\\');
 
-FLOAT_LITERAL: [0-9]+ '.' [0-9]* EXP* [0-9]*; 
-fragment EXP: ('e'|'E') [+-]*;
+FLOAT_LITERAL: [0-9]+ '.' [0-9]* EXP?; 
+fragment EXP: ('e'|'E') [+-]? [0-9]+;
 
 INTERGER_LITERAL: DEC | BIN | OCT | HEX;
 fragment DEC: '0' | [1-9] [0-9]*;

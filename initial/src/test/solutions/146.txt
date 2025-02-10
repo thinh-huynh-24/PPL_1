@@ -1,1 +1,1 @@
-"This is a string with a double quote\"",<EOF>
+"hello\\world",<EOF>

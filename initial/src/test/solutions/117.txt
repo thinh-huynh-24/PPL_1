@@ -1,1 +1,1 @@
-var,<EOF>
+const,<EOF>

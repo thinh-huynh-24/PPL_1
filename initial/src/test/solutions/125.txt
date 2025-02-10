@@ -1,1 +1,1 @@
-break,<EOF>
+struct,<EOF>

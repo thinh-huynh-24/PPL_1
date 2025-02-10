@@ -1,1 +1,1 @@
-func,abc,(,),<EOF>
+_abc,<EOF>
