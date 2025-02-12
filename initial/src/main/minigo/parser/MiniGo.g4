@@ -30,16 +30,16 @@ options{
 
 program  : statement+ EOF ;
 
-statement: var_decl_stmt end_stmt
-        | const_decl_stmt end_stmt
-        | func_decl end_stmt
-        | assignment_stmt end_stmt
-        | if_stmt end_stmt
-        | for_stmt end_stmt
-        | break_stmt end_stmt
-        | continue_stmt end_stmt 
-        | return_stmt end_stmt
-        | call_stmt end_stmt
+statement: var_decl_stmt 
+        | const_decl_stmt 
+        | func_decl 
+        | assignment_stmt 
+        | if_stmt 
+        | for_stmt 
+        | break_stmt 
+        | continue_stmt  
+        | return_stmt 
+        | call_stmt 
         ;
 
 assignment_stmt: (primitive_type | array_access | struct_access) ass_op expression;
@@ -53,11 +53,11 @@ basic_for: expression;
 with_init_con_upd: (assignment_stmt | var_decl_stmt) SEMI expression SEMI assignment_stmt;
 range_for: (IDENTIFIER | ) COMMA IDENTIFIER COLON_ASSIGN RANGE primitive_type;
 
-break_stmt: BREAK SEMI;
+break_stmt: BREAK end_stmt;
 
-continue_stmt: CONTINUE SEMI;
+continue_stmt: CONTINUE end_stmt;
 
-return_stmt: RETURN expression SEMI | RETURN SEMI ;
+return_stmt: RETURN expression end_stmt | RETURN end_stmt ;
 
 call_stmt: func_call;
 
@@ -76,7 +76,7 @@ func_decl: FUNC IDENTIFIER signature block;
 block: LBRACE list_expression RBRACE | LBRACE list_statement RBRACE;
 list_expression: expression end_stmt list_expression | expression end_stmt | ;
 list_statement: list_statement statement  | statement | ;
-const_decl_stmt: CONST IDENTIFIER ASSIGN expression end_stmt;
+const_decl_stmt: CONST IDENTIFIER ASSIGN expression;
 
 var_decl_stmt: VAR IDENTIFIER | VAR IDENTIFIER type_ | VAR IDENTIFIER type_ ASSIGN expression;
 
@@ -109,7 +109,7 @@ struct_access: type_ DOT IDENTIFIER;
 func_call: IDENTIFIER signature | IDENTIFIER DOT IDENTIFIER signature;
 
 
-struct_lit: IDENTIFIER LBRACE  RBRACE;
+struct_lit: IDENTIFIER LBRACE list_struct_elements RBRACE;
 list_struct_elements: struct_elements COMMA list_struct_elements | struct_elements;
 struct_elements: IDENTIFIER COLON expression;
 
