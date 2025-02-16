@@ -1,1 +1,1 @@
-struct,S,{,func,f,(,),int,{,return,0,;,},},<EOF>
+var,x,int,;,const,y,=,5,<EOF>

@@ -1,0 +1,4 @@
+func main() {
+            var r Rectangle
+            r.setDimensions(5, 10)
+        }

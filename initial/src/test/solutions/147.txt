@@ -1,1 +1,1 @@
-Unclosed string: hello
+123,0xFF,0o77,0b11,<EOF>

@@ -1,1 +1,1 @@
-.
+"String\nwith\tmultiple\rescapes"

@@ -1,1 +1,1 @@
-func,add,(,int,x,,,int,y,),int,{,return,x,+,y,;,},<EOF>
+for,i,:=,0,;,i,<,n,;,i,+=,1,<EOF>

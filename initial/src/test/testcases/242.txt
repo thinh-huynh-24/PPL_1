@@ -1,0 +1,19 @@
+func main() {
+            var arr []int = getArray()
+            var n int = len(arr)
+            for i := 0; i < n; i += 1 {
+                for j := i + 1; j < n; j += 1 {
+                    if arr[i] > arr[j] {
+                        var temp int = arr[i]
+                        arr[i] = arr[j]
+                        arr[j] = temp
+                    }
+                }
+            }
+            var median float
+            if n % 2 == 0 {
+                median = float(arr[n/2-1] + arr[n/2]) / 2
+            } else {
+                median = float(arr[n/2])
+            }
+        }

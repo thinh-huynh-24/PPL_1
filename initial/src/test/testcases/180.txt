@@ -1,1 +1,1 @@
-int x = 10; // assign 10 to x
+[][]int

@@ -1,1 +1,1 @@
-type Shape interface { area() float; }
+a += b -= c *= d

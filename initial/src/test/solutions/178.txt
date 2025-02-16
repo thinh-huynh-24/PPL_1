@@ -1,1 +1,1 @@
-'MiniGoLexer' object has no attribute 'previous_token'
+var,x,,,y,,,z,int,<EOF>

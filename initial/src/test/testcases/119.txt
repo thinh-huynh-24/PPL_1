@@ -1,1 +1,1 @@
-true
+struct interface type

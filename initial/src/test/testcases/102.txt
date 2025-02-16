@@ -1,1 +1,4 @@
-ABC
+/* This is a 
+        multi-line comment
+        /* with nested comment */
+        testing */

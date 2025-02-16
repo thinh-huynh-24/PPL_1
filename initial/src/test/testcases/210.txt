@@ -1,0 +1,4 @@
+type Shape interface {
+            getArea() float
+            getPerimeter() float
+        }

@@ -1,1 +1,1 @@
-func,<EOF>
+if,abc,else,xyz,<EOF>

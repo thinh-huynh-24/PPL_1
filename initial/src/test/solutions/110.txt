@@ -1,1 +1,1 @@
-abc,ErrorToken @
+123,abc,<EOF>

@@ -1,1 +1,1 @@
-func
+if abc else xyz

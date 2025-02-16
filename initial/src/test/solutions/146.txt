@@ -1,1 +1,1 @@
-"hello\\world",<EOF>
+Illegal escape in string: Hello\k

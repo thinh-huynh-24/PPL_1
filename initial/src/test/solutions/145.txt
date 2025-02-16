@@ -1,1 +1,1 @@
-"hello\"world",<EOF>
+Unclosed string: Hello World

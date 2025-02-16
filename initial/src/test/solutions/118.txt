@@ -1,1 +1,1 @@
-var,<EOF>
+break,continue,return,<EOF>

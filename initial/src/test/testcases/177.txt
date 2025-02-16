@@ -1,1 +1,1 @@
-/* this is an unclosed comment
+type Shape interface {}

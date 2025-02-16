@@ -1,1 +1,3 @@
-func,(,p,Point,),move,(,int,dx,,,int,dy,),{,p,.,x,+=,dx,;,p,.,y,+=,dy,;,},<EOF>
+"string
+with
+linebreaks",<EOF>

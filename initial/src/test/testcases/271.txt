@@ -1,0 +1,4 @@
+func main() {
+            var arr []int = getArray()
+            arr = append(arr, make([]int, 5)...)
+        }

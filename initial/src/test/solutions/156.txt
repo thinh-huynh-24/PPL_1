@@ -1,1 +1,1 @@
-%,<EOF>
+"Hello\t\n\r",<EOF>

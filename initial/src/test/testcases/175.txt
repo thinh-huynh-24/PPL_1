@@ -1,2 +1,1 @@
-/* this is a 
- multi-line comment */
+calc(x+y, z*w)

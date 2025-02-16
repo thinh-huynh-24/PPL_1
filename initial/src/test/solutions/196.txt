@@ -1,1 +1,1 @@
-a,=,b,+,c,-,d,*,e,/,f,%,g,;,<EOF>
+Illegal escape in string: \n\t\k

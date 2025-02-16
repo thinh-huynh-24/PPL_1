@@ -1,1 +1,5 @@
-var i ;
+func main() {
+            if (x > 0) {
+                return x
+            }
+        }

@@ -1,1 +1,1 @@
-/,*,this,is,an,unclosed,comment,<EOF>
+type,Shape,interface,{,},<EOF>

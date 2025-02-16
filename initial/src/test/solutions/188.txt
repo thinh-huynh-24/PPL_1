@@ -1,1 +1,1 @@
-type,Shape,interface,{,area,(,),float,;,},<EOF>
+a,+=,b,-=,c,*=,d,<EOF>

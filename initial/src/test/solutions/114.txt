@@ -1,1 +1,1 @@
-return,<EOF>
+if,else,for,<EOF>
