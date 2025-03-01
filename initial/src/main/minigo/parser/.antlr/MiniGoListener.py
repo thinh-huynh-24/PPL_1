@@ -134,15 +134,6 @@ class MiniGoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by MiniGoParser#end_stmt.
-    def enterEnd_stmt(self, ctx:MiniGoParser.End_stmtContext):
-        pass
-
-    # Exit a parse tree produced by MiniGoParser#end_stmt.
-    def exitEnd_stmt(self, ctx:MiniGoParser.End_stmtContext):
-        pass
-
-
     # Enter a parse tree produced by MiniGoParser#menthod_decl.
     def enterMenthod_decl(self, ctx:MiniGoParser.Menthod_declContext):
         pass
@@ -197,15 +188,6 @@ class MiniGoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by MiniGoParser#list_expression.
-    def enterList_expression(self, ctx:MiniGoParser.List_expressionContext):
-        pass
-
-    # Exit a parse tree produced by MiniGoParser#list_expression.
-    def exitList_expression(self, ctx:MiniGoParser.List_expressionContext):
-        pass
-
-
     # Enter a parse tree produced by MiniGoParser#list_statement.
     def enterList_statement(self, ctx:MiniGoParser.List_statementContext):
         pass
@@ -230,6 +212,15 @@ class MiniGoListener(ParseTreeListener):
 
     # Exit a parse tree produced by MiniGoParser#var_decl_stmt.
     def exitVar_decl_stmt(self, ctx:MiniGoParser.Var_decl_stmtContext):
+        pass
+
+
+    # Enter a parse tree produced by MiniGoParser#end_stmt.
+    def enterEnd_stmt(self, ctx:MiniGoParser.End_stmtContext):
+        pass
+
+    # Exit a parse tree produced by MiniGoParser#end_stmt.
+    def exitEnd_stmt(self, ctx:MiniGoParser.End_stmtContext):
         pass
 
 
@@ -338,6 +329,15 @@ class MiniGoListener(ParseTreeListener):
 
     # Exit a parse tree produced by MiniGoParser#array_element.
     def exitArray_element(self, ctx:MiniGoParser.Array_elementContext):
+        pass
+
+
+    # Enter a parse tree produced by MiniGoParser#nested_array.
+    def enterNested_array(self, ctx:MiniGoParser.Nested_arrayContext):
+        pass
+
+    # Exit a parse tree produced by MiniGoParser#nested_array.
+    def exitNested_array(self, ctx:MiniGoParser.Nested_arrayContext):
         pass
 
 
@@ -458,12 +458,12 @@ class MiniGoListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by MiniGoParser#struck_decl.
-    def enterStruck_decl(self, ctx:MiniGoParser.Struck_declContext):
+    # Enter a parse tree produced by MiniGoParser#struct_decl.
+    def enterStruct_decl(self, ctx:MiniGoParser.Struct_declContext):
         pass
 
-    # Exit a parse tree produced by MiniGoParser#struck_decl.
-    def exitStruck_decl(self, ctx:MiniGoParser.Struck_declContext):
+    # Exit a parse tree produced by MiniGoParser#struct_decl.
+    def exitStruct_decl(self, ctx:MiniGoParser.Struct_declContext):
         pass
 
 
