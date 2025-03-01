@@ -84,7 +84,7 @@ const_decl_stmt: CONST IDENTIFIER ASSIGN expression;
 
 var_decl_stmt: VAR IDENTIFIER | VAR IDENTIFIER type_ | VAR IDENTIFIER type_ ASSIGN expression | VAR IDENTIFIER  ASSIGN expression;
 
-end_stmt: SEMI | NL | ;
+end_stmt: SEMI;
 
 expression: term_1;
 term_1: term_2 OR expression | term_2;
